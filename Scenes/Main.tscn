@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/camera_movement.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/renderware/parser.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/utils/debug_info.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/utils/rotate_light.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/utils/map_builder.gd" type="Script" id=5]
+
+[sub_resource type="ProceduralSky" id=2]
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+glow_enabled = true
+glow_hdr_luminance_cap = 68.23
+
+[node name="Main" type="Spatial"]
+
+[node name="Head" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.829, -6 )
+
+[node name="Camera" type="Camera" parent="Head"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+script = ExtResource( 1 )
+
+[node name="Spatial" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 168.0
+margin_bottom = 168.0
+
+[node name="DebugInfo" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "FPS: 0"
+script = ExtResource( 3 )
+
+[node name="LightPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.51833, 3.00407e-05 )
+visible = false
+script = ExtResource( 4 )
+
+[node name="SpotLight" type="SpotLight" parent="LightPoint"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.698 )
+light_energy = 3.621
+shadow_enabled = true
+spot_range = 99.931
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="Spatial2" type="Spatial" parent="."]
+script = ExtResource( 5 )
