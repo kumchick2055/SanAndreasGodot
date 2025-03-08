@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var is_mode_captured = true
 # Настройки вращения

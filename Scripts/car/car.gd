@@ -1,10 +1,10 @@
-extends VehicleBody
+extends VehicleBody3D
 
 var max_rpm = 500
 var max_torque = 200
 
 func _physics_process(delta):
-	steering = lerp(steering,Input.get_axis("ui_right","ui_left") * 0.7, 5 * delta)
+	steering = lerp(steering,Input.get_axis("ui_right","ui_left") * 0.4, 5 * delta)
 
 	var acceleration = Input.get_axis("ui_down", "ui_up")
 	var rpm = $back_left_wheel.get_rpm()

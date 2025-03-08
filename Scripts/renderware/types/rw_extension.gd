@@ -2,5 +2,6 @@ class_name RwExtension
 extends RwChunk
 
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	pass

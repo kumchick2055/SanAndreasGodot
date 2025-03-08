@@ -7,7 +7,8 @@ var array_of_material_indices: Array
 var materials: Array
 
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	RwStruct.new(file)
 	
 	number_of_materials = file.get_32()

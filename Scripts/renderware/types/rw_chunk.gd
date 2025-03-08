@@ -1,5 +1,5 @@
 class_name RwChunk
-extends Node
+extends RefCounted
 
 
 enum {
@@ -27,7 +27,7 @@ var chunk_type: int
 var size: int
 var library_id: int
 
-func _init(file: File) -> void:
+func _init(file: FileAccess) -> void:
 	chunk_type = file.get_32()
 	size = file.get_32()
 	library_id = RWUtils.get_version(file.get_32())

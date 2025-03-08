@@ -13,7 +13,8 @@ class MeshData:
 	var indices: Array
 
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	RwStruct.new(file)
 	
 	flags = file.get_32()
@@ -37,4 +38,3 @@ func _init(file: File).(file) -> void:
 #		print(matIndx,'-',numIndices,'-',indices)
 		
 		meshesList.append(meshData)
-

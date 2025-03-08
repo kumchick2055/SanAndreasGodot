@@ -9,7 +9,8 @@ extends RwChunk
 var texture_name: String
 var mask_name: String
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	RwStruct.new(file)
 	
 #	texture_filtering = file.get_32()
@@ -29,5 +30,3 @@ func _init(file: File).(file) -> void:
 #	texture_name = 
 #	texture_name = RwString.new(file).string
 #	mask_name = RwString.new(file).string
-
-

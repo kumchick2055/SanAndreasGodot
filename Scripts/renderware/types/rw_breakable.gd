@@ -3,7 +3,8 @@ extends RwChunk
 
 var magic_number: int
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	magic_number = file.get_32()
 	
 	print('Magic Number-', magic_number)

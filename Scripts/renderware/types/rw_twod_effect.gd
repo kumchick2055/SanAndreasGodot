@@ -2,7 +2,7 @@ class_name RwTwoDEffect
 extends RwChunk
 
 var count_effects: int
-var effects: Array
+var effects: Array[TwoDEffect]
 
 
 class TwoDEffect:
@@ -14,7 +14,8 @@ class TwoDEffect:
 
 
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	count_effects = file.get_32()
 	
 	for i in count_effects:
@@ -136,8 +137,6 @@ class LightEntity:
 	
 	var shadowZDistance: int
 	var flags2: int
-	var padding: PoolByteArray
+	var padding: PackedByteArray
 	
 	var lookDirection: Vector3
-
-

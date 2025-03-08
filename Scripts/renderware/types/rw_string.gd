@@ -3,9 +3,10 @@ extends RwChunk
 
 var string: String
 
-func _init(file: File).(file):
+func _init(file: FileAccess):
+	super(file)
 
-	var chars: PoolByteArray
+	var chars: PackedByteArray
 	while true:
 		var ch := file.get_8()
 		if ch == 0:

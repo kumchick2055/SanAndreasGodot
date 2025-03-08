@@ -1,41 +1,47 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bb0bgphxjqfc5"]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/txd_viewer.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://npxusc500e3j" path="res://icon.png" id="1"]
+[ext_resource type="Script" uid="uid://c2twuayyocv6m" path="res://scenes/txd_viewer.gd" id="2"]
 
 [node name="TxdViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
 
 [node name="select_file" type="Button" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -96.5
-margin_top = 10.0
-margin_right = 96.5
-margin_bottom = 49.0
+offset_left = -96.5
+offset_top = 10.0
+offset_right = 96.5
+offset_bottom = 49.0
 text = "Select File"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -231.0
-margin_top = -231.0
-margin_right = 231.0
-margin_bottom = 231.0
-texture = ExtResource( 1 )
-expand = true
+offset_left = -231.0
+offset_top = -231.0
+offset_right = 231.0
+offset_bottom = 231.0
+texture = ExtResource("1")
+expand_mode = 1
 
 [node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -10.0
-margin_right = 29.0
-margin_bottom = 10.0
-text = "Select texture"
+offset_top = -10.0
+offset_right = 29.0
+offset_bottom = 10.0
 
 [connection signal="button_down" from="select_file" to="." method="_select_txd"]
 [connection signal="item_selected" from="OptionButton" to="." method="_load_image"]

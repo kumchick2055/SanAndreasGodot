@@ -10,7 +10,14 @@ export_presets.cfg
 .mono/
 data_*/
 
+.godot/*
+.import/*
+
 Models/*
+models/*
 
 GtaSource/*
 !GtaSource/README.md
+
+gta_source/*
+!gta_source/README.md

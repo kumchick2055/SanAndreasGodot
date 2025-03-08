@@ -71,12 +71,13 @@ var compressed: int
 var pad_raster_format: int
 
 var _image_start: int
-var _file: File
+var _file: FileAccess
 var _size: int
 var is_transparent: bool = false
 
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	var extension = RwExtension.new(file)
 	_size = extension.size
 	
@@ -117,28 +118,25 @@ func get_image():
 	
 	var result: Image = Image.new()
 	
-	var bytes: PoolByteArray
+	var bytes: PackedByteArray
 	var read_size := _size - 92
-	
-	
-	
-	print(d3dformat,'-', raster_format)
+
 
 	if d3dformat == CompressionMode.DXT1:
 		bytes = _file.get_buffer(read_size)
 		
-		result.create_from_data(width, height, false, Image.FORMAT_DXT1, bytes)
+		result = Image.create_from_data(width, height, false, Image.FORMAT_DXT1, bytes)
 		result.decompress()
 	elif d3dformat == CompressionMode.DXT3:
 		bytes = _file.get_buffer(read_size)
 		
-		result.create_from_data(width, height, false, Image.FORMAT_DXT3, bytes)
+		result = Image.create_from_data(width, height, false, Image.FORMAT_DXT3, bytes)
 		is_transparent = true
 		result.decompress()
 	elif d3dformat == CompressionMode.D3D_8888:
 		bytes = _file.get_buffer(read_size)
 		
-		result.create_from_data(width, height, false, Image.FORMAT_RGBA8, bytes)
+		result = Image.create_from_data(width, height, false, Image.FORMAT_RGBA8, bytes)
 		result.decompress()
 	elif d3dformat == CompressionMode.NONE:
 		bytes = _file.get_buffer(read_size)
@@ -175,7 +173,7 @@ func get_image():
 #
 #			pass
 		else:
-			var data: PoolByteArray
+			var data: PackedByteArray
 			var mip_width := width
 			var mip_height := height
 			
@@ -189,27 +187,26 @@ func get_image():
 			
 			if raster_format & RasterFormat.FORMAT_EXT_AUTO_MIPMAP:
 				result.generate_mipmaps()
-			result.lock()
+			false # result.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 			for i in width * height:
 				var x := int(i % width)
 				var y := int(i / width)
 				
 				var old := result.get_pixel(x,y)
 				result.set_pixel(x,y,Color(old.b, old.g, old.r, old.a))
-			result.unlock()
+			false # result.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 				
 
 	
-	var imgTexture = ImageTexture.new()
-	imgTexture.create_from_image(result)
+	var imgTexture = ImageTexture.create_from_image(result)
 	
 	
 	return imgTexture
 	
 
 
-func _unpad(length: int, read: int) -> PoolByteArray:
-	var result: PoolByteArray
+func _unpad(length: int, read: int) -> PackedByteArray:
+	var result: PackedByteArray
 	
 	for i in length:
 		for j in read:

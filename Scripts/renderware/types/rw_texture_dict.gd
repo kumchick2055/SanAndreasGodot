@@ -3,9 +3,10 @@ extends RwChunk
 
 var texture_count: int
 var device_id: int
-var textures: Array
+var textures: Array[RwRaster]
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	RwExtension.new(file)
 	
 	texture_count = file.get_16()

@@ -1,6 +1,6 @@
 extends Node
 
-var assets: Dictionary = {}
+var assets: Dictionary[String, DirEntry] = {}
 
 
 func _ready():
@@ -14,8 +14,8 @@ func _ready():
 	
 func load_image(path: String) -> void:
 	path = GameManager.game_path + '/' +  path
-	var file = File.new()
-	file.open(path, File.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
+	#file.open(path, File.READ)
 	assert(file != null, 'Not open ' + path + ' file')
 	
 	var version = file.get_buffer(4).get_string_from_ascii()
@@ -35,14 +35,14 @@ func load_image(path: String) -> void:
 
 
 
-func open_asset(name: String) -> File:
-	var file = File.new()
+func open_asset(name: String) -> FileAccess:
 	var asset_name = name.to_lower()
 	if asset_name in assets:
 		var asset = assets[asset_name] as DirEntry
-		file.open(asset.img. File.READ)
+		var file = FileAccess.open(asset.img,FileAccess.READ)
+		return file
 		
-	return file
+	return null
 
 class DirEntry:
 	var img: String

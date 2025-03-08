@@ -13,9 +13,11 @@ class Frame:
 	
 
 var frame_count: int
-var frame_data: Array
+var frame_data: Array[Frame]
+var frames: Array[RwFrame]
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	RwStruct.new(file)
 	
 	frame_count = file.get_32()
@@ -44,3 +46,7 @@ func _init(file: File).(file) -> void:
 		frame_data[i] = frame
 		
 	
+	for i in frame_count:
+		RwExtension.new(file)
+		var frame := RwFrame.new(file)
+		frames.append(frame)

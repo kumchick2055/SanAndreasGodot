@@ -32,7 +32,8 @@ var material_split: RwBinMeshPLG
 
 
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	RwStruct.new(file)
 	
 	flag_value = file.get_32()
@@ -144,9 +145,9 @@ func get_mesh() -> Dictionary:
 			for x in [1,0,2]:
 
 				if morph_t.has_normals:
-					st.add_normal(morph_t.normals[meshIndices[i+x]])
+					st.set_normal(morph_t.normals[meshIndices[i+x]])
 				if uvs.size() > 0:
-					st.add_uv(uvs[0][meshIndices[i+x]])
+					st.set_uv(uvs[0][meshIndices[i+x]])
 				st.add_vertex(morph_t.vertices[meshIndices[i+x]])
 				
 
@@ -184,5 +185,3 @@ class Triangle:
 	var vertex_1: int
 	var material_id: int
 	var vertex_3: int
-
-

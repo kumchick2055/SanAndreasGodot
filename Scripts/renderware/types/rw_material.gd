@@ -14,8 +14,8 @@ class Surface:
 	var specular: float
 	var diffuse: float
 
-func get_material() -> SpatialMaterial:
-	var mat = SpatialMaterial.new()
+func get_material() -> StandardMaterial3D:
+	var mat = StandardMaterial3D.new()
 	mat.albedo_color = color
 #	mat.set_blend_mode(SpatialMaterial.BLEND_MODE_)
 	
@@ -28,7 +28,8 @@ func get_material() -> SpatialMaterial:
 
 
 
-func _init(file: File).(file) -> void:
+func _init(file: FileAccess) -> void:
+	super(file)
 	RwStruct.new(file)
 	
 	flags = file.get_32()

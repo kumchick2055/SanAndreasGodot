@@ -5,7 +5,8 @@ extends RwChunk
 var colors: Array
 var magic_number: int
 
-func _init(file: File, num_vertices: int).(file) -> void:
+func _init(file: FileAccess, num_vertices: int) -> void:
+	super(file)
 	magic_number = file.get_32()
 	
 	if magic_number == 0:

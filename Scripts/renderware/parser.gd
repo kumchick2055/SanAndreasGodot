@@ -1,8 +1,8 @@
-extends Spatial
+extends Node3D
 
 func create_cube(position: Vector3, scale: Vector3):
 	# Создаем новый MeshInstance
-	var cube = MeshInstance.new()
+	var cube = MeshInstance3D.new()
 
 	# Создаем новый SurfaceTool
 	var surface_tool = SurfaceTool.new()
@@ -38,7 +38,7 @@ func create_cube(position: Vector3, scale: Vector3):
 	cube.mesh = mesh
 
 	# Устанавливаем позицию куба
-	cube.translation = position
+	cube.position = position
 
 	# Устанавливаем масштаб куба
 	cube.scale = scale
@@ -48,46 +48,46 @@ func create_cube(position: Vector3, scale: Vector3):
 	
 	
 func _ready():
-	var file_txd = File.new()
-	file_txd.open('res://Models/izbushka_lshnk.txd', File.READ)
+	var file_txd = FileAccess.open('res://Models/izbushka_lshnk.txd', FileAccess.READ)
 	
 	var chunk = RwTextureDict.new(file_txd)
 	var textures = chunk.textures
 	print(textures)
 	
-	var file = File.new()
-	file.open('res://Models/izbushka_psx.dff', File.READ)
+	var file = FileAccess.open('res://Models/izbushka_psx.dff', FileAccess.READ)
 
 	var data = RwClump.new(file)
 	
-	print(data)
-	print(data.atomics)
-	print(data.lights)
-	print(data.cameras)
-	print('----')
-
-	data = RwFrameList.new(file)
-	print(data)
-	
-	for i in data.frame_data:
-		print(i)
-
-	for i in data.frame_count:
-		var a := RwExtension.new(file)
-		var frame := RwFrame.new(file)
-
-	var geometry_list = RwGeometryList.new(file)
-	print(geometry_list)
-	print(geometry_list.number_of_geometries, '')
-	
-
-	var geometry = RwGeometry.new(file)
+	#print(data)
+	#print(data.atomics)
+	#print(data.lights)
+	#print(data.cameras)
+	#print('----')
+#
+	#data = RwFrameList.new(file)
+	#print(data)
+	#
+	#for i in data.frame_data:
+		#print(i)
+#
+	#for i in data.frame_count:
+		#var a := RwExtension.new(file)
+		#var frame := RwFrame.new(file)
+#
+	#var geometry_list = RwGeometryList.new(file)
+	#print(geometry_list)
+	#print(geometry_list.number_of_geometries, '')
+	#
+#
+	#var geometry = RwGeometry.new(file)
+	#var geometry_mesh = geometry.get_mesh()
+	var geometry = data.geometry_list.geometries[0]
 	var geometry_mesh = geometry.get_mesh()
 
 	
 	for material_index in geometry.material_list.materials.size():
 		var current_geometry = geometry_mesh[material_index]
-		var m = MeshInstance.new()
+		var m = MeshInstance3D.new()
 		m.mesh = current_geometry
 #		print(current_geometry.get_meta_list())
 		
@@ -121,7 +121,7 @@ func _ready():
 #		cube.scale = Vector3(0.1,0.1,0.1)
 #
 #		add_child(cube)
-		var light := OmniLight.new()
+		var light := OmniLight3D.new()
 		light.omni_range = i.entity.coronaSize + 0.6
 		light.shadow_enabled = true
 		light.light_color = i.entity.color
@@ -135,7 +135,5 @@ func _ready():
 			pass
 #	print(RwChunk.new(file))
 
-	rotate_x(deg2rad(-90))
+	rotate_x(deg_to_rad(-90))
 	
-
-
