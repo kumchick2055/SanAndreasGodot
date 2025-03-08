@@ -1,5 +1,5 @@
 class_name ItemDef
-extends Node
+extends RefCounted
 
 var id: int
 var model_name: String

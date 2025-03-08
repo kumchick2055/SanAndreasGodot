@@ -49,7 +49,6 @@ script = ExtResource("3")
 
 [node name="LightPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.51833, 3.00407e-05)
-visible = false
 script = ExtResource("4")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="LightPoint"]

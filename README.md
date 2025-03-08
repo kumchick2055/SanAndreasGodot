@@ -1,4 +1,6 @@
-Переработка движка GTA San Andreas на godot 3.5.2
-Не является полной реализацией всех механик в игре, основной упор будет идти на мультиплеер.
+# SanAndreasGodot
+_Reworking the GTA San Andreas engine on Godot 4.4_
 
-Основа на https://github.com/FOSS-Supremacy/OpenLiberty
+**It is not a complete implementation of all the mechanics in the game, the main focus will be on multiplayer.**
+
+Based on https://github.com/FOSS-Supremacy/OpenLiberty

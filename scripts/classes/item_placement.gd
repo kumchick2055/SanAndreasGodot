@@ -1,5 +1,5 @@
 class_name ItemPL
-extends Node
+extends RefCounted
 
 
 var id: int
