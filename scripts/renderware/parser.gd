@@ -1,51 +1,5 @@
 extends Node3D
 
-func create_cube(position: Vector3, scale: Vector3):
-	# Создаем новый MeshInstance
-	var cube = MeshInstance3D.new()
-
-	# Создаем новый SurfaceTool
-	var surface_tool = SurfaceTool.new()
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-
-	# Определяем вершины куба
-	var vertices = [
-		Vector3(-1, -1, -1), Vector3(1, -1, -1), Vector3(1, 1, -1), Vector3(-1, 1, -1),  # Задняя грань
-		Vector3(-1, -1, 1), Vector3(1, -1, 1), Vector3(1, 1, 1), Vector3(-1, 1, 1)   # Передняя грань
-	]
-
-	# Определяем индексы для треугольников
-	var indices = [
-		0, 1, 2, 0, 2, 3,  # Задняя грань
-		4, 5, 6, 4, 6, 7,  # Передняя грань
-		0, 3, 7, 0, 7, 4,  # Левая грань
-		1, 5, 6, 1, 6, 2,  # Правая грань
-		3, 2, 6, 3, 6, 7,  # Верхняя грань
-		0, 4, 5, 0, 5, 1   # Нижняя грань
-	]
-
-	# Добавляем вершины и индексы в SurfaceTool
-	for vertex in vertices:
-		surface_tool.add_vertex(vertex)
-
-	for index in indices:
-		surface_tool.add_index(index)
-
-	# Завершаем создание поверхности
-	var mesh = surface_tool.commit()
-
-	# Устанавливаем mesh для MeshInstance
-	cube.mesh = mesh
-
-	# Устанавливаем позицию куба
-	cube.position = position
-
-	# Устанавливаем масштаб куба
-	cube.scale = scale
-
-	# Добавляем куб в сцену
-	add_child(cube)
-	
 	
 func _ready():
 	var file_txd = FileAccess.open('res://Models/izbushka_lshnk.txd', FileAccess.READ)

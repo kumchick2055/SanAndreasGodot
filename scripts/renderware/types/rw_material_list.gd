@@ -10,6 +10,7 @@ var materials: Array
 func _init(file: FileAccess) -> void:
 	super(file)
 	RwStruct.new(file)
+	assert(chunk_type == MATERIAL_LIST, 'Failed type of chunk - MATERIAL_LIST')
 	
 	number_of_materials = file.get_32()
 	

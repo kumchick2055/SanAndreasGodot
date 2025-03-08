@@ -34,6 +34,7 @@ var material_split: RwBinMeshPLG
 
 func _init(file: FileAccess) -> void:
 	super(file)
+	assert(chunk_type == GEOMETRY, 'Failed type of chunk - GEOMETRY')
 	RwStruct.new(file)
 	
 	flag_value = file.get_32()

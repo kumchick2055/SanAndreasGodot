@@ -5,6 +5,7 @@ var string: String
 
 func _init(file: FileAccess):
 	super(file)
+	assert(chunk_type == STRING, 'Failed type of chunk - STRING')
 
 	var chars: PackedByteArray
 	while true:

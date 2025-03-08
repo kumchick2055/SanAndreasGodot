@@ -12,6 +12,7 @@ var geometry_list: RwGeometryList
 
 func _init(file: FileAccess) -> void:
 	super(file)
+	assert(chunk_type == CLUMP, 'Failed type of chunk - CLUMP')
 	RwStruct.new(file)
 	
 	atomics = file.get_32()

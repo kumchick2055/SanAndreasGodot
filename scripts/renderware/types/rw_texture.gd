@@ -12,7 +12,7 @@ var mask_name: String
 func _init(file: FileAccess) -> void:
 	super(file)
 	RwStruct.new(file)
-	
+	assert(chunk_type == TEXTURE, 'Failed type of chunk - TEXTURE')
 #	texture_filtering = file.get_32()
 #	uAddressing = file.get_32()
 #	vAddressing = file.get_32()

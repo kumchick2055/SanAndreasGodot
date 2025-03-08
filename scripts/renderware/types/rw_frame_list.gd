@@ -18,6 +18,8 @@ var frames: Array[RwFrame]
 
 func _init(file: FileAccess) -> void:
 	super(file)
+	assert(chunk_type == FRAME_LIST, 'Failed type of chunk - FRAME_LIST')
+	
 	RwStruct.new(file)
 	
 	frame_count = file.get_32()

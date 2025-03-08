@@ -15,7 +15,8 @@ class MeshData:
 
 func _init(file: FileAccess) -> void:
 	super(file)
-	RwStruct.new(file)
+	var header := RwStruct.new(file)
+	assert(header.chunk_type == BIN_MESH_PLG, 'Failed type of chunk - BIN_MESH_PLG')
 	
 	flags = file.get_32()
 	numMeshes = file.get_32()

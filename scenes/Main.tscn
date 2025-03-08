@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtkyj1lbkjrfs"]
+[gd_scene load_steps=7 format=3 uid="uid://dtkyj1lbkjrfs"]
 
 [ext_resource type="Script" uid="uid://dvgu78bberspr" path="res://scenes/camera_movement.gd" id="1"]
 [ext_resource type="Script" uid="uid://b5lqdqq365w75" path="res://scripts/renderware/parser.gd" id="2"]
 [ext_resource type="Script" uid="uid://dsdn8r4mtgx0x" path="res://scripts/utils/debug_info.gd" id="3"]
-[ext_resource type="Script" uid="uid://c7nm586jsxsx3" path="res://scripts/utils/rotate_light.gd" id="4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pbw6q"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -46,13 +45,3 @@ offset_right = 40.0
 offset_bottom = 14.0
 text = "FPS: 0"
 script = ExtResource("3")
-
-[node name="LightPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.51833, 3.00407e-05)
-script = ExtResource("4")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="LightPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.698)
-light_energy = 3.621
-shadow_enabled = true
-spot_range = 99.931

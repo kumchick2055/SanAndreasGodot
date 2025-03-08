@@ -31,6 +31,8 @@ func get_material() -> StandardMaterial3D:
 func _init(file: FileAccess) -> void:
 	super(file)
 	RwStruct.new(file)
+	assert(chunk_type == MATERIAL, 'Failed type of chunk - MATERIAL')
+	
 	
 	flags = file.get_32()
 	var r := file.get_8()
