@@ -43,9 +43,9 @@ func _process(delta):
 	velocity = Vector3()
 	
 	if Input.is_key_pressed(KEY_SHIFT):
-		move_speed = 10.0
+		move_speed = 500.0
 	else:
-		move_speed = 5.0
+		move_speed = 30.0
 	
 	# Обработка ввода с клавиатуры
 	if Input.is_action_pressed("ui_up"):

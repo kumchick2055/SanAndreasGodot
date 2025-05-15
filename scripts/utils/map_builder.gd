@@ -108,23 +108,28 @@ func _read_ipl_data(section: String, tokens: Array):
 		return
 	match section:
 		"inst":
+			
 			var placement := ItemPL.new()
 			placement.id = int(tokens[0])
 			placement.model_name = model_name
+			#print(tokens)
 			
 			placement.position = Vector3(
-				int(tokens[2]),
-				int(tokens[4]),
-				-int(tokens[3])
+				int(tokens[3]),
+				int(tokens[5]),
+				-int(tokens[4])
 			)
 			
 			placement.scale = Vector3(1,1,1)
 			
+			#modelID,  name, interior, posX, posY, posZ, quatX, quatY, quatZ, quatW, drawDistance
+			#["1800", "coast_platoA", "0", "2850.43", "-2850.91", "0.001", "0", "0", "0", "1", "1"]
+
 			placement.rotation = Quaternion(
-				-float(tokens[5]),
-				-float(tokens[7]),
 				-float(tokens[6]),
-				float(tokens[8])
+				-float(tokens[8]),
+				-float(tokens[7]),
+				float(tokens[9])
 			)
 
 			placements.append(placement)
@@ -150,7 +155,7 @@ func spawn(id: int, model_name: String, position: Vector3, scale: Vector3, rotat
 		model[i].position = position
 		model[i].scale = scale
 		model[i].quaternion = rotation
-		model[i].visibility_range_end = item.draw_distance
+		#model[i].visibility_range_end = item.draw_distance
 	
 	
 	return model
