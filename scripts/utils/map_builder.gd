@@ -145,6 +145,7 @@ func spawn(id: int, model_name: String, position: Vector3, scale: Vector3, rotat
 		
 	var instance := StreamedMesh.new(item)
 	var model = instance.load_mesh()
+	
 	for i in range(0, len(model)):
 		model[i].position = position
 		model[i].scale = scale
