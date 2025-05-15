@@ -5,17 +5,17 @@ var magic_number: int
 
 func _init(file: FileAccess) -> void:
 	super(file)
+	
+	# TODO: Затычка вонючая, нужно по норму сделать в vert colour и 2d effect
+	if chunk_type != BREAKABLE:
+		file.seek(_start)
+		return
+		
 	assert(chunk_type == BREAKABLE, 'Failed type of chunk - BREAKABLE')
 	
 	magic_number = file.get_32()
 	
-	print('Magic Number-', magic_number)
-	
 	if magic_number == 0:
 		return
 		
-	# TODO: 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	# TODO: сделать breakable

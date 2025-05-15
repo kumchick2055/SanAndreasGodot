@@ -79,7 +79,7 @@ var is_transparent: bool = false
 func _init(file: FileAccess) -> void:
 	super(file)
 	assert(chunk_type == RASTER, 'Failed type of chunk - RASTER')
-	var extension = RwExtension.new(file)
+	var extension = RwStruct.new(file)
 	_size = extension.size
 	
 	platform_id = file.get_16()

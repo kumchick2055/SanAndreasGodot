@@ -49,6 +49,6 @@ func _init(file: FileAccess) -> void:
 		
 	
 	for i in frame_count:
-		RwExtension.new(file)
+		RwStruct.new(file)
 		var frame := RwFrame.new(file)
 		frames.append(frame)

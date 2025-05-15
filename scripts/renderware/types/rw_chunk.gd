@@ -28,12 +28,19 @@ var chunk_type: int
 var size: int
 var library_id: int
 
+
+var _start: int
+
 func _init(file: FileAccess) -> void:
+	_start = file.get_position()
+		
 	chunk_type = file.get_32()
 	size = file.get_32()
 	library_id = RWUtils.get_version(file.get_32())
-	
 
 
 func _to_string():
 	return str(chunk_type) + "-" + str(size) + "-" + str(library_id)
+
+func skip(file: FileAccess) -> void:
+	file.seek(_start + size)

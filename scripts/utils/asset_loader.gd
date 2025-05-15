@@ -2,6 +2,7 @@ extends Node
 
 var assets: Dictionary[String, DirEntry] = {}
 
+var mutex := Mutex.new()
 
 func _ready():
 	load_image("models/gta3.img")
@@ -33,6 +34,7 @@ func load_image(path: String) -> void:
 		
 		assets[image_name] = entry
 
+	#print(assets)
 
 
 func open_asset(name: String) -> FileAccess:
@@ -40,6 +42,7 @@ func open_asset(name: String) -> FileAccess:
 	if asset_name in assets:
 		var asset = assets[asset_name] as DirEntry
 		var file = FileAccess.open(asset.img,FileAccess.READ)
+		file.seek(asset.offset)
 		return file
 		
 	return null

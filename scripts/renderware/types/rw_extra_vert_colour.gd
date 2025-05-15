@@ -7,6 +7,11 @@ var magic_number: int
 
 func _init(file: FileAccess, num_vertices: int) -> void:
 	super(file)
+	if chunk_type != EXTRA_VERT_COLOUR:
+		file.seek(_start)
+		return
+		
+		
 	assert(chunk_type == EXTRA_VERT_COLOUR, 'Failed type of chunk - EXTRA_VERT_COLOUR')
 	magic_number = file.get_32()
 	

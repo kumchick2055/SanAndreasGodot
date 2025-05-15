@@ -3,7 +3,7 @@ extends Node
 
 var base_path = GameManager.game_path + '/'
 var items: Dictionary
-var placements: Array
+var placements: Array[ItemPL]
 
 
 func normalize_path(path: String) -> String:
@@ -57,7 +57,6 @@ func _ready() -> void:
 					"IMG":
 						AssetLoader.load_image(img_path)
 					"IDE":
-						
 						_read_map_data(img_path, _read_ide_data)
 					"IPL":
 						_read_map_data(img_path, _read_ipl_data)
@@ -95,7 +94,7 @@ func _read_ide_data(section: String, tokens: Array):
 	match section:
 		"objs":
 			item.id = id
-			item.model_name = model_name
+			item.model_name = model_name + ".dff"
 			item.texture_name = tokens[2] + ".txd"
 			item.draw_distance = float(tokens[3])
 			item.flags = int(tokens[tokens.size() - 1])
@@ -129,3 +128,29 @@ func _read_ipl_data(section: String, tokens: Array):
 			)
 
 			placements.append(placement)
+
+
+
+func spawn_placement(ipl: ItemPL) -> Array[MeshInstance3D]:
+	return spawn(ipl.id, ipl.model_name, ipl.position, ipl.scale, ipl.rotation)
+	
+
+func spawn(id: int, model_name: String, position: Vector3, scale: Vector3, rotation: Quaternion) -> Array[MeshInstance3D]:
+	if not items.has(id):
+		return []
+	
+	var item := items[id] as ItemDef
+	if item.flags & 0x40:
+		return []
+		
+	var instance := StreamedMesh.new(item)
+	var model = instance.load_mesh()
+	for i in range(0, len(model)):
+		model[i].position = position
+		model[i].scale = scale
+		model[i].quaternion = rotation
+		model[i].visibility_range_end = item.draw_distance
+	
+	
+	return model
+	

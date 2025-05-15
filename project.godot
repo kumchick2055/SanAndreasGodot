@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 
 GameManager="*res://scripts/game_manager.gd"
 AssetLoader="*res://scripts/utils/asset_loader.gd"
+MapBuilder="*res://scripts/utils/map_builder.gd"
 
 [debug]
 

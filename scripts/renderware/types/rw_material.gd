@@ -56,7 +56,7 @@ func _init(file: FileAccess) -> void:
 
 	if isTextured:
 		texture = RwTexture.new(file)
-
+		
 		# Extension
 		RwStruct.new(file)
 		# Extension

@@ -4,4 +4,4 @@ extends RwChunk
 
 func _init(file: FileAccess) -> void:
 	super(file)
-	pass
+	print(self)

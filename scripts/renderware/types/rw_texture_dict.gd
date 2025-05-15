@@ -7,7 +7,7 @@ var textures: Array[RwRaster]
 
 func _init(file: FileAccess) -> void:
 	super(file)
-	RwExtension.new(file)
+	RwStruct.new(file)
 	assert(chunk_type == TEXTURE_DICTIONARY, 'Failed type of chunk - TEXTURE_DICTIONARY')
 	
 	texture_count = file.get_16()

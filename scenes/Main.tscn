@@ -1,40 +1,69 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtkyj1lbkjrfs"]
+[gd_scene load_steps=9 format=3 uid="uid://dtkyj1lbkjrfs"]
 
 [ext_resource type="Script" uid="uid://dvgu78bberspr" path="res://scenes/camera_movement.gd" id="1"]
-[ext_resource type="Script" uid="uid://b5lqdqq365w75" path="res://scripts/renderware/parser.gd" id="2"]
+[ext_resource type="Shader" uid="uid://33nx6n4bhnv0" path="res://shaders/shaders/sky.gdshader" id="2_c01mt"]
 [ext_resource type="Script" uid="uid://dsdn8r4mtgx0x" path="res://scripts/utils/debug_info.gd" id="3"]
+[ext_resource type="Script" uid="uid://b5lqdqq365w75" path="res://scripts/renderware/parser.gd" id="3_vcsgt"]
+[ext_resource type="Script" uid="uid://c7ekuup66olp5" path="res://scripts/world.gd" id="5_vcsgt"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pbw6q"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nxtc6"]
+shader = ExtResource("2_c01mt")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/stars_scale = 1.0
+shader_parameter/stars_opacity = 1.0
+shader_parameter/overwritten_time = 0.0
 
-[sub_resource type="Sky" id="Sky_v1gob"]
-sky_material = SubResource("ProceduralSkyMaterial_pbw6q")
+[sub_resource type="Sky" id="Sky_jlsqs"]
+sky_material = SubResource("ShaderMaterial_nxtc6")
 
-[sub_resource type="Environment" id="Environment_jw32o"]
+[sub_resource type="Environment" id="Environment_q8u5g"]
 background_mode = 2
-sky = SubResource("Sky_v1gob")
-tonemap_mode = 2
-glow_enabled = true
+sky = SubResource("Sky_jlsqs")
 
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.799407, -0.592013, -0.102319, -0.333088, 0.294993, 0.895562, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_jw32o")
+environment = SubResource("Environment_q8u5g")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.829, -6)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1608, -2382)
 script = ExtResource("1")
 
 [node name="Node3D" type="Node3D" parent="."]
-script = ExtResource("2")
+visible = false
+script = ExtResource("3_vcsgt")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 168.0
@@ -45,3 +74,6 @@ offset_right = 40.0
 offset_bottom = 14.0
 text = "FPS: 0"
 script = ExtResource("3")
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("5_vcsgt")

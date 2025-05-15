@@ -20,9 +20,6 @@ var num_triangles: int
 var geometry_num_vertices: int
 var num_morph_target: int
 
-
-
-
 var uvs: Array
 var tris: Array
 var morph_targets: Array
@@ -30,6 +27,9 @@ var morph_targets: Array
 var material_list: RwMaterialList
 var material_split: RwBinMeshPLG
 
+var breakable: RwBreakable
+var vert_colour: RwExtraVertColour
+var twod_effects: RwTwoDEffect
 
 
 func _init(file: FileAccess) -> void:
@@ -116,10 +116,22 @@ func _init(file: FileAccess) -> void:
 		
 	material_list = RwMaterialList.new(file)
 	
+	# TODO: разобраться с extension
+	
+	## Extension
+	#RwExtension.new(file)
+	## Extension
+	#RwExtension.new(file)
+	var extension = RwExtension.new(file)
 	# if material split
 	if flag_value & rpGEOMETRYTRISTRIP == 0:
 		material_split = RwBinMeshPLG.new(file)
 		print('IS MATERIAL SPLIT')
+		
+	breakable = RwBreakable.new(file)
+	vert_colour = RwExtraVertColour.new(file, geometry_num_vertices)
+	twod_effects = RwTwoDEffect.new(file)
+
 		
 	
 

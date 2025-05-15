@@ -16,6 +16,10 @@ class TwoDEffect:
 
 func _init(file: FileAccess) -> void:
 	super(file)
+	if chunk_type != TWOD_EFFECT:
+		file.seek(_start)
+		return
+		
 	assert(chunk_type == TWOD_EFFECT, 'Failed type of chunk - TWOD_EFFECT')
 	
 	count_effects = file.get_32()
@@ -70,7 +74,7 @@ func _init(file: FileAccess) -> void:
 		
 		effects.append(effect)
 	
-	print(count_effects)
+
 
 enum CoronaShowMode {
 	DEFAULT = 0,

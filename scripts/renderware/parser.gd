@@ -2,39 +2,16 @@ extends Node3D
 
 	
 func _ready():
-	var file_txd = FileAccess.open('res://Models/izbushka_lshnk.txd', FileAccess.READ)
-	
+	#var file_txd = FileAccess.open('res://Models/landshaft_1.txd', FileAccess.READ)
+	var file_txd := AssetLoader.open_asset('landshaft_1.txd')
 	var chunk = RwTextureDict.new(file_txd)
 	var textures = chunk.textures
-	print(textures)
+	#print(textures)
 	
-	var file = FileAccess.open('res://Models/izbushka_psx.dff', FileAccess.READ)
-
+	#var file = FileAccess.open('res://Models/island_mt01.dff', FileAccess.READ)
+	var file := AssetLoader.open_asset('island_mt01.dff')
 	var data = RwClump.new(file)
 	
-	#print(data)
-	#print(data.atomics)
-	#print(data.lights)
-	#print(data.cameras)
-	#print('----')
-#
-	#data = RwFrameList.new(file)
-	#print(data)
-	#
-	#for i in data.frame_data:
-		#print(i)
-#
-	#for i in data.frame_count:
-		#var a := RwExtension.new(file)
-		#var frame := RwFrame.new(file)
-#
-	#var geometry_list = RwGeometryList.new(file)
-	#print(geometry_list)
-	#print(geometry_list.number_of_geometries, '')
-	#
-#
-	#var geometry = RwGeometry.new(file)
-	#var geometry_mesh = geometry.get_mesh()
 	var geometry = data.geometry_list.geometries[0]
 	var geometry_mesh = geometry.get_mesh()
 
@@ -66,28 +43,20 @@ func _ready():
 
 		add_child(m)
 
-	print(RwBreakable.new(file))
-	print(RwExtraVertColour.new(file, geometry.geometry_num_vertices))
-	var twoDEffects := RwTwoDEffect.new(file)
-	for i in twoDEffects.effects:
-#		var cube := MeshInstance.new()
-#		cube.mesh = create_cube(i.position, Vector3(0.01, 0.01, 0.01))
-#		cube.scale = Vector3(0.1,0.1,0.1)
+
+	#for i in geometry.twod_effects.effects:
 #
-#		add_child(cube)
-		var light := OmniLight3D.new()
-		light.omni_range = i.entity.coronaSize + 0.6
-		light.shadow_enabled = true
-		light.light_color = i.entity.color
-		light.light_energy = 50
-		light.light_indirect_energy = 1
-		light.translate(i.position)
-#		light.look_at_from_position(i.position, i.entity.lookDirection, Vector3.UP)
-		add_child(light)
-		
-		if i.entry_type == 0:
-			pass
-#	print(RwChunk.new(file))
+		#var light := OmniLight3D.new()
+		#light.omni_range = i.entity.coronaSize + 0.6
+		#light.shadow_enabled = true
+		#light.light_color = i.entity.color
+		#light.light_energy = 50
+		#light.light_indirect_energy = 1
+		#light.translate(i.position)
+		#add_child(light)
+		#
+		#if i.entry_type == 0:
+			#pass
 
 	rotate_x(deg_to_rad(-90))
 	
